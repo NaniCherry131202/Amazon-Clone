@@ -15,7 +15,7 @@ export default function Products() {
       try {
         setError(null);
         setLoading(true);
-        const res = await axios.get(`http://localhost:5000/api/products?search=${searchTerm}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/products${searchTerm}`);
         setProducts(res.data);
       } catch (err) {
         console.error('Error fetching products:', err);
@@ -29,7 +29,7 @@ export default function Products() {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/cart', {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/cart`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       setCart(res.data);
@@ -49,7 +49,7 @@ export default function Products() {
   const addToCart = async (productId) => {
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/cart',
+        `${import.meta.env.VITE_API_BASE_URL}/api/cart`,
         { productId, quantity: 1 },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -73,7 +73,7 @@ export default function Products() {
   const updateQuantity = async (productId, newQuantity) => {
     try {
       const res = await axios.put(
-        'http://localhost:5000/api/cart',
+        `${import.meta.env.VITE_API_BASE_URL}/api/cart`,
         { productId, quantity: newQuantity },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },

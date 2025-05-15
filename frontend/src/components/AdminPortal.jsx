@@ -8,7 +8,7 @@ export default function AdminPortal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/products', form, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/products`, form, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       toast.success('Product added successfully!', {

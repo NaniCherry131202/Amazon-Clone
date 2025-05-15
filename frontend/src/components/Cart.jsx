@@ -10,7 +10,7 @@ export default function Cart() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/cart', {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/cart`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setCart(res.data);
@@ -39,7 +39,7 @@ export default function Cart() {
 
   const updateQuantity = async (productId, newQuantity) => {
     try {
-      const res = await axios.put('http://localhost:5000/api/cart', {
+      const res = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/cart`, {
         productId,
         quantity: newQuantity,
       }, {

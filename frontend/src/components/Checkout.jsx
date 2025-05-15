@@ -16,7 +16,7 @@ export default function Checkout() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/auth/user', {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/auth/user`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setUser(res.data);
@@ -30,7 +30,7 @@ export default function Checkout() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const addressRes = await axios.post('http://localhost:5000/api/address', {
+      const addressRes = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/address`, {
         street: form.street,
         city: form.city,
         state: form.state,
@@ -39,7 +39,7 @@ export default function Checkout() {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
 
-      await axios.post('http://localhost:5000/api/checkout', {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/checkout`, {
         addressId: addressRes.data._id,
         card: form.card,
       }, {
